@@ -22,7 +22,13 @@ const persistedData = {
     errors: {},
   },
 };
-const store = createStore(rootReducer, persistedData, applyMiddleware(...middleware));
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  rootReducer,
+  persistedData,
+  applyMiddleware(...middleware),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 store.subscribe(_throttle(() => {
   saveQueueState(store.getState());
